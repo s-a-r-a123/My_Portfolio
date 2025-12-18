@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SARANYA's Portfolio</title>
+
+  <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------------- RESET ---------------- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; transition: background 0.4s, color 0.4s; }
+
+    /* ---------------- THEME ---------------- */
+    body.light { background: #f8fafc; color: #0f172a; }
+    body.dark { background: #020617; color: #e5e7eb; }
+
+    /* ---------------- HEADER ---------------- */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    body.light header { background: rgba(255,255,255,0.8); }
+    body.dark header { background: rgba(2,6,23,0.8); }
+
+    /* Header glow underline */
+    header::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 4px;
+      border-radius: 50px;
+      background: linear-gradient(90deg, transparent, #22c55e, #4ade80, #22c55e, transparent);
+      box-shadow: 0 0 22px rgba(34,197,94,0.7);
+      pointer-events: none;
+    }
+
+    .logo { font-weight: 700; letter-spacing: 2px; }
+
+    nav a {
+      margin-left: 24px;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: -6px;
+      width: 0; height: 2px;
+      background: #22c55e;
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after { width: 100%; }
+
+    .theme-toggle {
+      margin-left: 32px;
+      cursor: pointer;
+    }
+
+    /* -------- THEME SWITCH -------- */
+    .theme-switch {
+      position: relative;
+      width: 56px;
+      height: 28px;
+      background: linear-gradient(135deg, #22c55e, #4ade80);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      padding: 4px;
+      transition: background 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 12px rgba(34,197,94,0.4);
+    }
+
+    body.dark .theme-switch {
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+      box-shadow: 0 4px 14px rgba(34,197,94,0.6);
+    }
+
+    body.dark .theme-switch { background: #1e293b; }
+
+    .switch-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      transition: transform 0.3s, background 0.3s;
+    }
+
+    body.dark .switch-thumb {
+      transform: translateX(28px);
+      background: #022c22;
+      color: #ffffff;
+    }
+
+    body.dark .switch-thumb { transform: translateX(28px); }
+
+    /* ---------------- HERO ---------------- */
+
+    .hero-glow {
+      height: 6px;
+      width: 80%;
+      margin: 0 auto 80px;
+      border-radius: 50px;
+      background: linear-gradient(90deg, transparent, #22c55e, #4ade80, #22c55e, transparent);
+      box-shadow: 0 0 30px rgba(34,197,94,0.8);
+    }
+
+    /* Glow divider after each section */
+    .section-glow {
+      height: 4px;
+      width: 70%;
+      margin: 0 auto 80px;
+      border-radius: 50px;
+      background: linear-gradient(90deg, transparent, #22c55e, #4ade80, #22c55e, transparent);
+      box-shadow: 0 0 22px rgba(34,197,94,0.6);
+      opacity: 0.9;
+    }
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 20px 40px;
+    }
+
+    .hero-content {
+      text-align: center;
+      max-width: 700px;
+      animation: fadeUp 1s ease;
+    }
+
+    .hero h1 { font-size: clamp(32px, 6vw, 56px); }
+    .hero span {
+      color: #22c55e;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .hero p {
+      margin: 20px 0 32px;
+      opacity: 0.85;
+      font-style: italic;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      background: linear-gradient(135deg, #22c55e, #4ade80);
+      color: #022c22;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(34,197,94,0.4);
+    }
+
+    /* ---------------- SECTIONS ---------------- */
+    section { padding: 100px 10%; }
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    /* ---------------- PROJECTS ---------------- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 32px;
+    }
+
+    .card {
+      position: relative;
+      padding: 24px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 2px;
+      background: linear-gradient(120deg, #22c55e, #4ade80, #22c55e);
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 60px rgba(34,197,94,0.25);
+    }
+
+    body.light .card { background: #ffffff; }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .card h3 { margin-bottom: 12px; }
+
+        /* ---------------- SKILLS ---------------- */
+    .skill-group {
+      cursor: pointer;
+    }
+
+    .skill-panel {
+      display: none;
+      margin-top: 16px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .skill-panel span {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 16px;
+      background: rgba(34,197,94,0.15);
+      font-size: 14px;
+    }
+
+    .skill-group.active .skill-panel {
+      display: flex;
+    }
+
+        /* ---------------- CONTACT ---------------- */
+    .contact { text-align: center; }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: nowrap;
+      margin-top: 40px;
+    }
+
+    .social-card {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      color: inherit;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s, box-shadow 0.3s;
+      overflow: hidden;
+    }
+
+    /* Neon glow for contact cards (same as other cards) */
+    .social-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 20px;
+      padding: 2px;
+      background: linear-gradient(120deg, #22c55e, #4ade80, #22c55e);
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .social-card:hover::before {
+      opacity: 1;
+    }
+
+    body.light .social-card { background: #ffffff; }
+
+    .social-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .social-card img {
+      width: 32px;
+      height: 32px;
+      filter: invert(1);
+    }
+
+    body.light .social-card img { filter: none; }
+
+    .social-card span {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* ---------------- ANIMATION ---------------- */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------------- RESPONSIVE ---------------- */
+    @media (max-width: 768px) {
+      nav {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: rgba(2,6,23,0.95);
+        flex-direction: column;
+        width: 200px;
+        padding: 20px;
+        display: none;
+      }
+
+      nav.active { display: flex; }
+
+      nav a { margin: 12px 0; }
+
+      .hamburger {
+      display: flex; /* visible on all screen sizes */
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      margin-right: 12px;
+    }
+
+      section { padding: 80px 6%; }
+    }
+
+    /* ---------------- HAMBURGER ---------------- */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      margin-left: 20px;
+    }
+
+    .hamburger span {
+      width: 24px;
+      height: 3px;
+      background: currentColor;
+      border-radius: 2px;
+    }
+ display: none; }
+      section { padding: 80px 6%; }
+    }
+  /* ---------------- BACK TO TOP ---------------- */
+    #backToTop {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      background: linear-gradient(135deg, #22c55e, #4ade80);
+      color: #022c22;
+      box-shadow: 0 10px 30px rgba(34,197,94,0.6);
+      z-index: 200;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    #backToTop:hover {
+      transform: translateY(-4px) scale(1.05);
+    }
+
+    body.dark #backToTop {
+      color: #ecfeff;
+    }
+
+  </style>
+</head>
+<body class="light">
+
+  <!-- HEADER -->
+    <header>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="logo">PORTFOLIO</div>
+    </div>
+
+    <nav>
+      <a href="#about">About Me</a>
+      <a href="#skills">Skills</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="theme-toggle">
+      <div class="theme-switch" id="themeToggle">
+        <div class="switch-thumb">🌙</div>
+      </div>
+    </div>
+  </header>
+
+    <!-- TOP GLOW -->
+  <div class="hero-glow"></div>
+
+  <!-- HERO -->
+  <section class="hero" id="about">
+    <div class="hero-content">
+      <h1>Hi, I'm <span>Saranya R</span></h1>
+      <p>Welcome to my portfolio</p>
+      <button class="btn" onclick="scrollToSection('contact')">Contact</button>
+    </div>
+  </section>
+
+  <!-- HERO GLOW DIVIDER -->
+  <div class="hero-glow"></div>
+
+  <!-- ABOUT -->
+  <section id="about-section">
+    <h2>About Me</h2>
+    <div style="max-width:900px;margin:auto;text-align:center;opacity:0.9;line-height:1.8;">
+      <p>
+        I am a resilient and detail-oriented professional with a strong interest in building
+        secure, scalable, and user-focused digital solutions. I enjoy solving problems,
+        learning continuously, and applying modern tools and best practices to create
+        meaningful applications.
+      </p>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+    <!-- CERTIFICATES -->
+    <!-- CERTIFICATES -->
+  <section id="certificates">
+    <h2>Certificates</h2>
+
+    <div class="projects-grid">
+      <!-- AWS Educate -->
+      <div class="card skill-group" onclick="togglePanel(this)">
+        <h3>AWS Educate</h3>
+        <div class="skill-panel">
+          <span>Cloud Computing 101</span>
+          <span>Getting Started with Storage</span>
+          <span>Getting Started with Compute</span>
+          <span>Getting Started with Networking</span>
+          <span>Getting Started with Database</span>
+          <span>Getting Started with Cloud Operations</span>
+          <span>Getting Started with Security</span>
+          <span>Getting Started with Serverless</span>
+          <span>Machine Learning Foundations</span>
+          <span>Introduction to Generative Artificial Intelligence</span>
+        </div>
+      </div>
+
+      <!-- AWS Skill Builder -->
+      <div class="card skill-group" onclick="togglePanel(this)">
+        <h3>AWS Skill Builder</h3>
+        <div class="skill-panel">
+          <span>AWS Cloud Quest: Cloud Practitioner</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+    <!-- PROJECTS -->
+    <!-- PROJECTS -->
+    <!-- PROJECTS -->
+  <section id="projects">
+    <h2>Projects</h2>
+
+    <div class="projects-grid">
+      <!-- Resume Portfolio -->
+      <div class="card skill-group" onclick="togglePanel(this)">
+        <h3>Resume Portfolio</h3>
+        <div class="skill-panel">
+          <p>A personal resume portfolio website built using HTML, CSS, and JavaScript. The project focuses on responsive design, clean UI layout, smooth interactions, and showcasing skills and projects in a professional manner.</p>
+        </div>
+      </div>
+
+      <!-- Air Quality Prediction -->
+      <div class="card skill-group" onclick="togglePanel(this)">
+        <h3>Air Quality Prediction</h3>
+        <div class="skill-panel">
+          <p>A data-driven project developed using Python to analyze air quality datasets and predict pollution levels. It involves data preprocessing, analysis, and basic predictive modeling with visual insights.</p>
+        </div>
+      </div>
+
+      <!-- File Encryptor -->
+      <div class="card skill-group" onclick="togglePanel(this)">
+        <h3>File Encryptor</h3>
+        <div class="skill-panel">
+          <p>A secure file encryption application built using HTML, CSS, and JavaScript. The project demonstrates encryption logic to protect sensitive files and emphasizes client-side security concepts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- SKILLS -->
+  <section id="skills">
+    <h2>Skills</h2>
+
+    <div class="projects-grid">
+      <!-- Languages -->
+      <div class="card skill-group" onclick="togglePanel(this)">
+        <h3>Languages</h3>
+        <div class="skill-panel">
+          <span>HTML</span>
+          <span>CSS</span>
+          <span>JavaScript</span>
+          <span>C Programming</span>
+          <span>Java</span>
+          <span>Python</span>
+          <span>C++</span>
+        </div>
+      </div>
+
+      <!-- Operating Systems -->
+      <div class="card skill-group" onclick="togglePanel(this)">
+        <h3>Operating Systems</h3>
+        <div class="skill-panel">
+          <span>Linux</span>
+        </div>
+      </div>
+
+      <!-- AWS -->
+      <div class="card skill-group" onclick="togglePanel(this)">
+        <h3>AWS</h3>
+        <div class="skill-panel">
+          <span>EC2</span>
+          <span>S3</span>
+          <span>IAM</span>
+          <span>Cloud Fundamentals</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+      <!-- EDUCATION -->
+    <!-- EDUCATION -->
+    <!-- EDUCATION -->
+  <section id="education">
+    <h2>Education</h2>
+
+    <div class="projects-grid">
+      <!-- Degree -->
+      <div class="card skill-group" onclick="togglePanel(this)">
+        <h3>B.E. Computer Science & Engineering (Cybersecurity)</h3>
+        <div class="skill-panel">
+          <p><strong>Institution:</strong> St. Joseph's Institute of Technology</p>
+          <p><strong>Year:</strong> Second Year</p>
+          <p><strong>Focus:</strong> Specialized in securing digital infrastructure through advanced cybersecurity techniques, ethical hacking, and cloud defense strategies.</p>
+        </div>
+      </div>
+
+      <!-- Higher Secondary -->
+      <div class="card skill-group" onclick="togglePanel(this)">
+        <h3>Higher Secondary Education</h3>
+        <div class="skill-panel">
+          <p><strong>Institution:</strong> Government Higher Secondary School</p>
+          <p><strong>HSE:</strong> 79%</p>
+          <p><strong>SSLC:</strong> 75%</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <h2>Connect With Me</h2>
+
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/saranya-r-63819232b" target="_blank" class="social-card" aria-label="LinkedIn">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" />
+        <span>LinkedIn</span>
+      </a>
+
+      <a href="https://github.com/s-a-r-a123" target="_blank" class="social-card" aria-label="GitHub">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" alt="GitHub" />
+        <span>GitHub</span>
+      </a>
+
+      <a href="https://skillsprofile.skillbuilder.aws/user/saranyaR" target="_blank" class="social-card" aria-label="AWS Skill Builder">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/amazonaws.svg" alt="AWS Skill Builder" />
+        <span>AWS Skill Builder</span>
+      </a>
+
+      <a href="https://www.credly.com/users/saranya-r.88888/badges#credly" target="_blank" class="social-card" aria-label="Credly">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/credly.svg" alt="Credly" />
+        <span>Credly</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button id="backToTop" aria-label="Back to top">↑</button>
+
+  <script>
+    // SCROLL REVEAL
+    const revealElements = document.querySelectorAll('section');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(sec => {
+      sec.style.opacity = 0;
+      sec.style.transform = 'translateY(40px)';
+      sec.style.transition = 'all 0.8s ease';
+      observer.observe(sec);
+    });
+
+    // HAMBURGER MENU
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.querySelector('nav');
+
+    hamburger.onclick = () => {
+      nav.classList.toggle('active');
+    };
+
+
+    // THEME TOGGLE
+    const toggle = document.getElementById('themeToggle');
+    const thumb = toggle.querySelector('.switch-thumb');
+
+    toggle.onclick = () => {
+      document.body.classList.toggle('dark');
+      document.body.classList.toggle('light');
+      thumb.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    };
+
+    // SMOOTH SCROLL
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // BACK TO TOP BUTTON
+    const backToTop = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 400) {
+        backToTop.style.display = 'flex';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    backToTop.onclick = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // FORM SUBMIT (DEMO)
+    function handleSubmit(e) {
+      e.preventDefault();
+      alert('Message sent! (demo)');
+    }
+
+    // SKILL PANEL TOGGLE
+    function togglePanel(card) {
+      const section = card.closest('section');
+      const cards = section.querySelectorAll('.skill-group');
+      cards.forEach(c => {
+        if (c !== card) c.classList.remove('active');
+      });
+      card.classList.toggle('active');
+    }
+  </script>
+</body>
+</html>

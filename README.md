@@ -39,6 +39,8 @@
 click here to check it out:  *⁕*★(੭*ˊᵕˋ)੭*ଘ
 https://saranya-portfolio.s3.ap-south-2.amazonaws.com/portfolio.html
 
+click this on Cloudfront: (o゜▽゜)o☆
+https://d2dxjeti8ru8ug.cloudfront.net/
 
 ---
 

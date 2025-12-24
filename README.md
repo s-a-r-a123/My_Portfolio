@@ -1,5 +1,5 @@
 # Interactive Portfolio Website
-(o ゜▽  ゜)o☆
+#(o ゜▽  ゜)o☆
 
 ⫸ This is a fully responsive and interactive personal portfolio website built using **HTML (Intergrated with CSS and JavaScript)**.  
  ⫸ It showcases my skills, projects, certifications, and contact details with a modern UI and smooth user interactions.  ヾ(≧▽≦*)o

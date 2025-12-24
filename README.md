@@ -67,7 +67,8 @@ Interested in secure, scalable, and user-focused web and cloud solutions. :)
 
 ---
 
-## Connect With Me  ( / ￣︶￣)人(￣︶￣ \ )
+## Connect With Me 
+## ( / ￣︶￣)人(￣︶￣ \ )
 
 - LinkedIn: https://www.linkedin.com/in/saranya-r-63819232b  
 - GitHub: https://github.com/s-a-r-a123  
